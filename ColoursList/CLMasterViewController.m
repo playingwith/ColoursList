@@ -10,6 +10,10 @@
 
 #import "CLDetailViewController.h"
 
+#import <objc/runtime.h>
+
+#import "UIColor+Colours.h"
+
 @interface CLMasterViewController () {
     NSMutableArray *_objects;
 }
@@ -22,6 +26,32 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Master", @"Master");
+        
+        _objects = @[].mutableCopy;
+        
+        unsigned count;
+        Method *methods;
+        Class targetClass = [UIColor class];
+        
+        // Instance Methods
+        /*
+        methods = class_copyMethodList(targetClass, &count);
+        for (int i = 0; i < count; i++) {
+            [_objects addObject:@[NSStringFromSelector(method_getName(methods[i]))]];
+        }
+         */
+        
+        // Class Methods
+        methods = class_copyMethodList(object_getClass(targetClass), &count);
+        for (int i = 0; i < count; i++) {
+            // Select "Color$"
+            NSString *name = NSStringFromSelector(method_getName(methods[i]));
+            NSRange range = [name rangeOfString:@"Color$" options:NSRegularExpressionSearch];
+            if (range.location != NSNotFound) {
+                [_objects addObject:name];
+            }
+        }        
+    
     }
     return self;
 }
@@ -71,14 +101,42 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    NSString *name = _objects[indexPath.row];
+    cell.textLabel.text = name;
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+
+    SEL selector = NSSelectorFromString(name);
+    UIColor *color = nil;
+    if ([UIColor respondsToSelector:selector]) {
+        color = [UIColor performSelector:selector];
+    }
+    
+    if (color) {
+        cell.detailTextLabel.text = [color hexString];
+    }
+
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    NSString *name = _objects[indexPath.row];
+    
+    SEL selector = NSSelectorFromString(name);
+    UIColor *color = nil;
+    if ([UIColor respondsToSelector:selector]) {
+        color = [UIColor performSelector:selector];
+    }
+    
+    if (color) {
+        cell.backgroundColor = color;
+    }
+
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

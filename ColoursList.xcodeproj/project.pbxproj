@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8021C60906194D398D492DBC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9873813AF673453BA8F398A4 /* libPods.a */; };
 		9B1BD108174270C3002B1BE2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1BD107174270C3002B1BE2 /* UIKit.framework */; };
 		9B1BD10A174270C3002B1BE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1BD109174270C3002B1BE2 /* Foundation.framework */; };
 		9B1BD10C174270C3002B1BE2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B1BD10B174270C3002B1BE2 /* CoreGraphics.framework */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9873813AF673453BA8F398A4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1BD104174270C3002B1BE2 /* ColoursList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColoursList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1BD107174270C3002B1BE2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9B1BD109174270C3002B1BE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,6 +65,7 @@
 		9B1BD13B174270C4002B1BE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9B1BD13D174270C4002B1BE2 /* ColoursListTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColoursListTests.h; sourceTree = "<group>"; };
 		9B1BD13E174270C4002B1BE2 /* ColoursListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ColoursListTests.m; sourceTree = "<group>"; };
+		C4560A4A33B0423893D6E9AB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,7 @@
 				9B1BD108174270C3002B1BE2 /* UIKit.framework in Frameworks */,
 				9B1BD10A174270C3002B1BE2 /* Foundation.framework in Frameworks */,
 				9B1BD10C174270C3002B1BE2 /* CoreGraphics.framework in Frameworks */,
+				8021C60906194D398D492DBC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +100,7 @@
 				9B1BD137174270C4002B1BE2 /* ColoursListTests */,
 				9B1BD106174270C3002B1BE2 /* Frameworks */,
 				9B1BD105174270C3002B1BE2 /* Products */,
+				C4560A4A33B0423893D6E9AB /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +120,7 @@
 				9B1BD109174270C3002B1BE2 /* Foundation.framework */,
 				9B1BD10B174270C3002B1BE2 /* CoreGraphics.framework */,
 				9B1BD131174270C4002B1BE2 /* SenTestingKit.framework */,
+				9873813AF673453BA8F398A4 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -175,9 +181,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B1BD142174270C4002B1BE2 /* Build configuration list for PBXNativeTarget "ColoursList" */;
 			buildPhases = (
+				7C14BA0EB5DC4A0EAE4E6C4B /* Check Pods Manifest.lock */,
 				9B1BD100174270C3002B1BE2 /* Sources */,
 				9B1BD101174270C3002B1BE2 /* Frameworks */,
 				9B1BD102174270C3002B1BE2 /* Resources */,
+				05170F7884B442E5A7C48DD3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -260,6 +268,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		05170F7884B442E5A7C48DD3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		7C14BA0EB5DC4A0EAE4E6C4B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sanbox is not in sync with the Podfile.lock. Run 'pod install'.\nEOM\n    exit 1\nfi\n";
+		};
 		9B1BD12E174270C4002B1BE2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -399,22 +435,28 @@
 		};
 		9B1BD143174270C4002B1BE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4560A4A33B0423893D6E9AB /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ColoursList/ColoursList-Prefix.pch";
 				INFOPLIST_FILE = "ColoursList/ColoursList-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		9B1BD144174270C4002B1BE2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4560A4A33B0423893D6E9AB /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ColoursList/ColoursList-Prefix.pch";
 				INFOPLIST_FILE = "ColoursList/ColoursList-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -472,6 +514,7 @@
 				9B1BD144174270C4002B1BE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9B1BD145174270C4002B1BE2 /* Build configuration list for PBXNativeTarget "ColoursListTests" */ = {
 			isa = XCConfigurationList;
@@ -480,6 +523,7 @@
 				9B1BD147174270C4002B1BE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
